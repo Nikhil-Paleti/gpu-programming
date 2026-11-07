@@ -1,9 +1,25 @@
-./pycache
-./__pycache__/
-**/__pycache__/
-**/*.py[cod]
-**/*$py.class
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
 
+# uv virtual environment and project-local cache
+.venv/
+.uv-cache/
+
+# Native/CUDA build outputs
+build/
+*.o
+*.a
+*.so
+a.out
+*.cubin
+*.fatbin
+
+# Nsight profiling reports
+*.ncu-rep
+*.nsys-rep
+*.qdstrm
+
+# macOS metadata
 .DS_Store
-/jax
-/JAX_google
