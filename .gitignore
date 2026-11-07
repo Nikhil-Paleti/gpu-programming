@@ -23,7 +23,3 @@ a.out
 
 # macOS metadata
 .DS_Store
-
-# Local JAX checkouts
-/jax
-/JAX_google
