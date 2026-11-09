@@ -12,10 +12,9 @@ def add_kernel(a: cute.Tensor, b: cute.Tensor, c: cute.Tensor):
     rows, cols = a.shape 
 
     if (i < rows * cols):
-        # row = i // cols 
-        # col = i % cols 
-        c[i] = a[i] + b[i]
-        # c[row, col] = a[row, col] + b[row, col]
+        row = i // cols
+        col = i % cols
+        c[row, col] = a[row, col] + b[row, col]
 
 @cute.jit 
 def launch_add(a: cute.Tensor, b: cute.Tensor, c: cute.Tensor):
@@ -47,3 +46,15 @@ def main():
 if __name__ == "__main__":
     main()
 
+
+# CuTe's a[i] is a logical index, not a raw memory offset.
+# For shape (rows, cols), it maps to (i % rows, i // rows).
+# Explicit row-major indexing uses (i // cols, i % cols) instead.
+#
+# Example: shape (2, 4), with rows [A B C D] and [E F G H]:
+#   a[i] visits:       A E B F C G D H
+#   row-major visits: A B C D E F G H
+#
+# Both give correct sums because A, B, and C use matching coordinates.
+# Explicit row-major indexing lets neighboring threads access neighboring
+# memory locations, favoring coalesced access for these tensors.
