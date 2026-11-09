@@ -12,10 +12,9 @@ def add_kernel(a: cute.Tensor, b: cute.Tensor, c: cute.Tensor):
     rows, cols = a.shape 
 
     if (i < rows * cols):
-        # row = i // cols 
-        # col = i % cols 
-        c[i] = a[i] + b[i]
-        # c[row, col] = a[row, col] + b[row, col]
+        row = i // cols
+        col = i % cols
+        c[row, col] = a[row, col] + b[row, col]
 
 @cute.jit 
 def launch_add(a: cute.Tensor, b: cute.Tensor, c: cute.Tensor):
