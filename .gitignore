@@ -23,3 +23,6 @@ a.out
 
 # macOS metadata
 .DS_Store
+
+# bazel stuff 
+/bazel-*

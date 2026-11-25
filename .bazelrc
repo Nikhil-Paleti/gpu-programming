@@ -1,0 +1,4 @@
+build --@rules_cuda//cuda:archs=compute_120:compute_120,sm_120
+build -c opt 
+build:dbg -c dbg
+build:dbg --@rules_cuda//cuda:copts=-G

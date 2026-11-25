@@ -1,0 +1,13 @@
+module(name = "gpu_programming")
+
+bazel_dep(name = "rules_cc", version = "0.2.28")
+bazel_dep(name = "rules_cuda", version = "0.4.0")
+
+cuda = use_extension("@rules_cuda//cuda:extensions.bzl", "toolchain")
+
+cuda.toolkit(
+  name="cuda",
+  toolkit_path=""
+)
+
+use_repo(cuda, "cuda")
