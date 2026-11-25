@@ -5,8 +5,23 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "black>=26.10.1",
     "numpy>=2.5.4",
     "nvidia-cutlass-dsl[cu13]>=4.8.1",
     "torch>=2.15.0",
 ]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "N803", "N806",  # M, N, K, BLOCK_SIZE: kernel naming convention
+    "INP001",        # folders without __init__.py
+    "COM812",        # conflicts with ruff format
+    "T201",          # print() is how these scripts report results
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"

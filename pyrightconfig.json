@@ -1,0 +1,8 @@
+{
+  "venvPath": "bazel-bin/tools/py_env/py_env.runfiles/_main/tools/py_env",
+  "venv": "_py_env.venv",
+  "pythonVersion": "3.12",
+  "extraPaths": [
+    "bazel-bin/tools/py_env/py_env.runfiles/_main/tools/py_env/_py_env.venv/lib/python3.12/site-packages/nvidia_cutlass_dsl/dsl_packages"
+  ]
+}
