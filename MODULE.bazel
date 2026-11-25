@@ -2,6 +2,7 @@ module(name = "gpu_programming")
 
 bazel_dep(name = "rules_cc", version = "0.2.28")
 bazel_dep(name = "rules_cuda", version = "0.4.0")
+bazel_dep(name = "rules_python", version = "2.5.1")
 
 cuda = use_extension("@rules_cuda//cuda:extensions.bzl", "toolchain")
 
@@ -11,3 +12,23 @@ cuda.toolkit(
 )
 
 use_repo(cuda, "cuda")
+
+python = use_extension("@rules_python//python/extensions:python.bzl", "python")
+
+python.toolchain(
+  python_version="3.12",
+  is_default=True
+)
+
+pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
+
+pip.parse(
+  hub_name = "py_deps",
+  python_version = "3.12",
+  requirements_lock = "//:requirements_lock.txt",
+)
+
+use_repo(pip, "py_deps")
+
+rules_python_config = use_extension("@rules_python//python/extensions:config.bzl", "config")
+rules_python_config.explicit_init_py(default = True)

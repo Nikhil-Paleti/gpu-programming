@@ -1,0 +1,12 @@
+load("@rules_python//python:defs.bzl", "py_binary")
+
+py_binary(
+  name = "add",
+  srcs = ["add.py"],
+  deps = [
+    "@py_deps//torch",
+    "@py_deps//numpy",
+    "@py_deps//nvidia_cutlass_dsl",
+    "@py_deps//nvidia_cutlass_dsl_libs_cu13"
+  ]
+)
